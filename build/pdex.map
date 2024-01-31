@@ -1,0 +1,193 @@
+
+Discarded input sections
+
+ .text          0x00000000        0x0 C:\Users\quinn\AppData\Local\Temp\ccEYwcuV.o
+ .data          0x00000000        0x0 C:\Users\quinn\AppData\Local\Temp\ccEYwcuV.o
+ .bss           0x00000000        0x0 C:\Users\quinn\AppData\Local\Temp\ccEYwcuV.o
+ .text          0x00000000        0x0 C:\Users\quinn\AppData\Local\Temp\ccrBGZzu.o
+ .data          0x00000000        0x0 C:\Users\quinn\AppData\Local\Temp\ccrBGZzu.o
+ .bss           0x00000000        0x0 C:\Users\quinn\AppData\Local\Temp\ccrBGZzu.o
+ .text.malloc   0x00000000       0x40 C:\Users\quinn\AppData\Local\Temp\ccrBGZzu.o
+ .text.realloc  0x00000000       0x44 C:\Users\quinn\AppData\Local\Temp\ccrBGZzu.o
+ .text.free     0x00000000       0x48 C:\Users\quinn\AppData\Local\Temp\ccrBGZzu.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD C:\Users\quinn\AppData\Local\Temp\ccEYwcuV.o
+LOAD C:\Users\quinn\AppData\Local\Temp\ccrBGZzu.o
+START GROUP
+LOAD C:/Users/quinn/Downloads/arm-gnu-toolchain-13.2.rel1-mingw-w64-i686-arm-none-eabi/arm-gnu-toolchain-13.2.Rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1\libgcc.a
+LOAD C:/Users/quinn/Downloads/arm-gnu-toolchain-13.2.rel1-mingw-w64-i686-arm-none-eabi/arm-gnu-toolchain-13.2.Rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1\libg.a
+LOAD C:/Users/quinn/Downloads/arm-gnu-toolchain-13.2.rel1-mingw-w64-i686-arm-none-eabi/arm-gnu-toolchain-13.2.Rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1\libc.a
+END GROUP
+START GROUP
+LOAD C:/Users/quinn/Downloads/arm-gnu-toolchain-13.2.rel1-mingw-w64-i686-arm-none-eabi/arm-gnu-toolchain-13.2.Rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1\libgcc.a
+LOAD C:/Users/quinn/Downloads/arm-gnu-toolchain-13.2.rel1-mingw-w64-i686-arm-none-eabi/arm-gnu-toolchain-13.2.Rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1\libc.a
+LOAD C:/Users/quinn/Downloads/arm-gnu-toolchain-13.2.rel1-mingw-w64-i686-arm-none-eabi/arm-gnu-toolchain-13.2.Rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1\libm.a
+END GROUP
+
+.text           0x00000000      0x325
+ *(.text)
+ *(.text.*)
+ .text.eventHandler
+                0x00000000       0xe0 C:\Users\quinn\AppData\Local\Temp\ccEYwcuV.o
+                0x00000000                eventHandler
+ .text.update   0x000000e0      0x178 C:\Users\quinn\AppData\Local\Temp\ccEYwcuV.o
+ .text.eventHandlerShim
+                0x00000258       0x68 C:\Users\quinn\AppData\Local\Temp\ccrBGZzu.o
+                0x00000258                eventHandlerShim
+ *(.init)
+ *(.fini)
+ *crtbegin.o(.ctors)
+ *crtbegin?.o(.ctors)
+ *(EXCLUDE_FILE(*crtend.o *crtend?.o) .ctors)
+ *(SORT_BY_NAME(.ctors.*))
+ *(.ctors)
+ *crtbegin.o(.dtors)
+ *crtbegin?.o(.dtors)
+ *(EXCLUDE_FILE(*crtend.o *crtend?.o) .dtors)
+ *(SORT_BY_NAME(.dtors.*))
+ *(.dtors)
+ *(.rodata*)
+ .rodata        0x000002c0       0x65 C:\Users\quinn\AppData\Local\Temp\ccEYwcuV.o
+ *(.eh_frame*)
+
+.glue_7         0x00000328        0x0
+ .glue_7        0x00000328        0x0 linker stubs
+
+.glue_7t        0x00000328        0x0
+ .glue_7t       0x00000328        0x0 linker stubs
+
+.vfp11_veneer   0x00000328        0x0
+ .vfp11_veneer  0x00000328        0x0 linker stubs
+
+.v4_bx          0x00000328        0x0
+ .v4_bx         0x00000328        0x0 linker stubs
+
+.iplt           0x00000328        0x0
+ .iplt          0x00000328        0x0 C:\Users\quinn\AppData\Local\Temp\ccEYwcuV.o
+
+.rel.dyn        0x00000328        0x0
+ .rel.iplt      0x00000328        0x0 C:\Users\quinn\AppData\Local\Temp\ccEYwcuV.o
+
+.data           0x00000328       0x14
+                0x00000328                        __etext = .
+                0x00000328                        __data_start__ = .
+ *(vtable)
+ *(.data*)
+ .data.fontpath
+                0x00000328        0x4 C:\Users\quinn\AppData\Local\Temp\ccEYwcuV.o
+                0x00000328                fontpath
+ .data.x        0x0000032c        0x4 C:\Users\quinn\AppData\Local\Temp\ccEYwcuV.o
+                0x0000032c                x
+ .data.y        0x00000330        0x4 C:\Users\quinn\AppData\Local\Temp\ccEYwcuV.o
+                0x00000330                y
+ .data.dx       0x00000334        0x4 C:\Users\quinn\AppData\Local\Temp\ccEYwcuV.o
+                0x00000334                dx
+ .data.dy       0x00000338        0x4 C:\Users\quinn\AppData\Local\Temp\ccEYwcuV.o
+                0x00000338                dy
+                0x0000033c                        . = ALIGN (0x4)
+                [!provide]                        PROVIDE (__preinit_array_start = .)
+ *(.preinit_array)
+                [!provide]                        PROVIDE (__preinit_array_end = .)
+                0x0000033c                        . = ALIGN (0x4)
+                [!provide]                        PROVIDE (__init_array_start = .)
+ *(SORT_BY_NAME(.init_array.*))
+ *(.init_array)
+                [!provide]                        PROVIDE (__init_array_end = .)
+                0x0000033c                        . = ALIGN (0x4)
+                [!provide]                        PROVIDE (__fini_array_start = .)
+ *(SORT_BY_NAME(.fini_array.*))
+ *(.fini_array)
+                [!provide]                        PROVIDE (__fini_array_end = .)
+                0x0000033c                        . = ALIGN (0x4)
+                0x0000033c                        __data_end__ = .
+
+.igot.plt       0x0000033c        0x0
+ .igot.plt      0x0000033c        0x0 C:\Users\quinn\AppData\Local\Temp\ccEYwcuV.o
+
+.bss            0x0000033c        0x8
+                0x0000033c                        . = ALIGN (0x4)
+                0x0000033c                        __bss_start__ = .
+ *(.bss*)
+ .bss.font      0x0000033c        0x4 C:\Users\quinn\AppData\Local\Temp\ccEYwcuV.o
+                0x0000033c                font
+ .bss.pdrealloc
+                0x00000340        0x4 C:\Users\quinn\AppData\Local\Temp\ccrBGZzu.o
+ *(COMMON)
+ *(COM)
+                0x00000344                        . = ALIGN (0x4)
+                0x00000344                        __bss_end__ = .
+
+/DISCARD/
+ *(.ARM.exidx)
+OUTPUT(a.out elf32-littlearm)
+LOAD linker stubs
+
+.debug_info     0x00000000     0xb311
+ .debug_info    0x00000000     0x5982 C:\Users\quinn\AppData\Local\Temp\ccEYwcuV.o
+ .debug_info    0x00005982     0x598f C:\Users\quinn\AppData\Local\Temp\ccrBGZzu.o
+
+.debug_abbrev   0x00000000      0x480
+ .debug_abbrev  0x00000000      0x23d C:\Users\quinn\AppData\Local\Temp\ccEYwcuV.o
+ .debug_abbrev  0x0000023d      0x243 C:\Users\quinn\AppData\Local\Temp\ccrBGZzu.o
+
+.debug_loc      0x00000000      0x198
+ .debug_loc     0x00000000       0x88 C:\Users\quinn\AppData\Local\Temp\ccEYwcuV.o
+ .debug_loc     0x00000088      0x110 C:\Users\quinn\AppData\Local\Temp\ccrBGZzu.o
+
+.debug_aranges  0x00000000       0x60
+ .debug_aranges
+                0x00000000       0x28 C:\Users\quinn\AppData\Local\Temp\ccEYwcuV.o
+ .debug_aranges
+                0x00000028       0x38 C:\Users\quinn\AppData\Local\Temp\ccrBGZzu.o
+
+.debug_ranges   0x00000000       0x40
+ .debug_ranges  0x00000000       0x18 C:\Users\quinn\AppData\Local\Temp\ccEYwcuV.o
+ .debug_ranges  0x00000018       0x28 C:\Users\quinn\AppData\Local\Temp\ccrBGZzu.o
+
+.debug_line     0x00000000      0x85e
+ .debug_line    0x00000000      0x3ed C:\Users\quinn\AppData\Local\Temp\ccEYwcuV.o
+ .debug_line    0x000003ed      0x471 C:\Users\quinn\AppData\Local\Temp\ccrBGZzu.o
+
+.debug_str      0x00000000     0x27b4
+ .debug_str     0x00000000     0x27b4 C:\Users\quinn\AppData\Local\Temp\ccEYwcuV.o
+                               0x293d (size before relaxing)
+ .debug_str     0x000027b4     0x297f C:\Users\quinn\AppData\Local\Temp\ccrBGZzu.o
+
+.comment        0x00000000       0x44
+ .comment       0x00000000       0x44 C:\Users\quinn\AppData\Local\Temp\ccEYwcuV.o
+                                 0x45 (size before relaxing)
+ .comment       0x00000044       0x45 C:\Users\quinn\AppData\Local\Temp\ccrBGZzu.o
+
+.ARM.attributes
+                0x00000000       0x2a
+ .ARM.attributes
+                0x00000000       0x2a C:\Users\quinn\AppData\Local\Temp\ccEYwcuV.o
+ .ARM.attributes
+                0x0000002a       0x2a C:\Users\quinn\AppData\Local\Temp\ccrBGZzu.o
+
+.debug_frame    0x00000000      0x100
+ .debug_frame   0x00000000       0x60 C:\Users\quinn\AppData\Local\Temp\ccEYwcuV.o
+ .debug_frame   0x00000060       0xa0 C:\Users\quinn\AppData\Local\Temp\ccrBGZzu.o
+
+Cross Reference Table
+
+Symbol                                            File
+dx                                                C:\Users\quinn\AppData\Local\Temp\ccEYwcuV.o
+dy                                                C:\Users\quinn\AppData\Local\Temp\ccEYwcuV.o
+eventHandler                                      C:\Users\quinn\AppData\Local\Temp\ccEYwcuV.o
+                                                  C:\Users\quinn\AppData\Local\Temp\ccrBGZzu.o
+eventHandlerShim                                  C:\Users\quinn\AppData\Local\Temp\ccrBGZzu.o
+font                                              C:\Users\quinn\AppData\Local\Temp\ccEYwcuV.o
+fontpath                                          C:\Users\quinn\AppData\Local\Temp\ccEYwcuV.o
+free                                              C:\Users\quinn\AppData\Local\Temp\ccrBGZzu.o
+malloc                                            C:\Users\quinn\AppData\Local\Temp\ccrBGZzu.o
+realloc                                           C:\Users\quinn\AppData\Local\Temp\ccrBGZzu.o
+x                                                 C:\Users\quinn\AppData\Local\Temp\ccEYwcuV.o
+y                                                 C:\Users\quinn\AppData\Local\Temp\ccEYwcuV.o
