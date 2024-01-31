@@ -46,13 +46,15 @@ int y = (240-TEXT_HEIGHT)/2;
 int dx = 1;
 int dy = 2;
 
+static const char *str = "Hello World! Basic Application";
+
 static int update(void* userdata)
 {
     PlaydateAPI* pd = userdata;
     
     pd->graphics->clear(kColorWhite);
     pd->graphics->setFont(font);
-    pd->graphics->drawText("Hello World!", strlen("Hello World!"), kASCIIEncoding, x, y);
+    pd->graphics->drawText(str, strlen(str), kASCIIEncoding, x, y);
 
     x += dx;
     y += dy;
