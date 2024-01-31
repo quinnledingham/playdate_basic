@@ -18,12 +18,12 @@ LCDFont* font = NULL;
 #ifdef _WINDLL
 __declspec(dllexport)
 #endif
-int eventHandler(PlaydateAPI* pd, PDSystemEvent event, uint32_t arg)
-{
+
+int 
+eventHandler(PlaydateAPI* pd, PDSystemEvent event, uint32_t arg) {
     (void)arg; // arg is currently only used for event = kEventKeyPressed
 
-    if ( event == kEventInit )
-    {
+    if ( event == kEventInit ) {
         const char* err;
         font = pd->graphics->loadFont(fontpath, &err);
         
@@ -46,10 +46,10 @@ int y = (240-TEXT_HEIGHT)/2;
 int dx = 1;
 int dy = 2;
 
-static const char *str = "Hello World! Basic Application";
+static const char *str = "Hello World! Application";
 
-static int update(void* userdata)
-{
+static int 
+update(void* userdata) {
     PlaydateAPI* pd = userdata;
     
     pd->graphics->clear(kColorWhite);
