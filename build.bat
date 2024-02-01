@@ -5,6 +5,8 @@ pushd %CD%
 IF NOT EXIST build mkdir build
 cd build
 
+set PLAYDATE_SDK_PATH=C:\Users\quinn\Documents\PlaydateSDK
+
 cmake ..
 
 REM see errors in console
