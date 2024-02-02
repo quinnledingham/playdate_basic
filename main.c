@@ -26,7 +26,9 @@ struct Data {
     Matrix_4x4 model;
     Matrix_4x4 projection;
     Matrix_4x4 view;
-} data;
+};
+
+struct Data data;
 
 #define TEXT_WIDTH 86
 #define TEXT_HEIGHT 16
@@ -52,17 +54,6 @@ get_viewport(float32 x, float32 y,
     return result;
 }
 
-internal Matrix_4x4
-get_viewport_4x4(float32 x, float32 y, float32 z) {
-    Matrix_4x4 result =  {
-        x/2.0f, 0, 0, (x - 1.0f)/2.0f,
-        0, y/2.0f, 0, (y - 1.0f)/2.0f,
-        0, 0, 1, 0,
-        0, 0, 0, 1
-    };
-    return result;
-}
-
 internal Vector2_s32
 vertex_get_pos(struct Vertex_XNU v) {
     Vector3 v3 = v.position;
@@ -73,13 +64,10 @@ vertex_get_pos(struct Vertex_XNU v) {
     pos.z = pos.z / pos.w;
     pos.w = pos.w / pos.w;
     Vector2_s32 result = get_viewport(pos.x, pos.y, 
-                                    1, 1, -1, -1,
-                                      LCD_COLUMNS, LCD_ROWS, 0, 0
-                                      );
+                                      1, 1, -1, -1,
+                                      LCD_COLUMNS, LCD_ROWS, 0, 0);
     return result;
 }
-
-LCDPattern test;
 
 LCDPattern grey50 = {
     0x55, 0xAA, 0x55, 0xAA, 0x55, 0xAA, 0x55, 0xAA, // Bitmap, each byte is a row of pixel
@@ -119,15 +107,7 @@ update(void* userdata) {
     PDButtons down;
     pd->system->getButtonState(&down, 0, 0);
 
-    Vector3 magnitude = { 0.5f, 0.5f, 0.5f };
-
-    if (down & kButtonDown) {
-        data.camera.position = v3_subtract(data.camera.position, v3_multiply(data.camera.target, magnitude));
-    }
-
-    if (down & kButtonUp) {
-        data.camera.position = v3_add(data.camera.position, v3_multiply(data.camera.target, magnitude));
-    }
+    Vector3 magnitude = { 0.01f, 0.01f, 0.01f };
 
     if (down & kButtonRight) {
         data.camera.yaw += 1.0f;
@@ -137,6 +117,17 @@ update(void* userdata) {
         data.camera.yaw -= 1.0f;
     }
 
+    float32 crank_angle = pd->system->getCrankAngle();
+    float32 crank_delta = pd->system->getCrankChange();
+    
+    Vector3 position_delta = { crank_delta / 360.0f, crank_delta / 360.0f, crank_delta / 360.0f };
+    v3_multiply(position_delta, magnitude);
+    data.camera.position = v3_add(data.camera.position, v3_multiply(data.camera.target, position_delta));
+    //pd->system->logToConsole("%f", position_delta.x);
+    
+    float32 bob_magnitude = 0.5f;
+    data.camera.position.y = bob_magnitude * sinf(crank_angle * DEG2RAD);
+    
     update_camera_target(&data.camera);
     data.view = get_view(data.camera);
 
@@ -158,16 +149,13 @@ int eventHandler(PlaydateAPI* pd, PDSystemEvent event, uint32_t arg) {
             // Note: If you set an update callback in the kEventInit handler, the system assumes the game is pure C and doesn't run any Lua code in the game
             pd->system->setUpdateCallback(update, pd);
 
-            data.camera.position = (Vector3) { 0,  0,  5 };
+            data.camera.position = (Vector3) { 0,  0,  -5 };
             data.camera.target   = (Vector3) { 0,  0,  0 };
             data.camera.up       = (Vector3) { 0,  1,  0 };
             data.camera.fov      = 75.0f;
             data.camera.yaw      = 45.0f;
             data.camera.pitch    = 0.0f;
             update_camera_target(&data.camera);
-
-            memset(test, kColorBlack, sizeof(u8) * 16);
-            memset(test + (sizeof(u8) * 16), kColorWhite, sizeof(u8) * 8);
 
             Vector3 pos = { 0, 0, 0 };
             Vector3 scale = { 1, 1, 1 };
@@ -176,172 +164,7 @@ int eventHandler(PlaydateAPI* pd, PDSystemEvent event, uint32_t arg) {
             data.view = get_view(data.camera);
             data.mesh = get_rect_mesh();
         } break;
-
-        case kEventKeyPressed: {
-            switch(arg) {
-                case kButtonDown: {
-                    data.camera.pitch -= 1.0f;
-                    update_camera_target(&data.camera);
-                    data.view = get_view(data.camera);
-                } break;
-            }
-
-        } break;
-
     }
     
     return 0;
 }
-
-
-
-/*
-//
-//  main.c
-//  Extension
-//
-//  Created by Dave Hayden on 7/30/14.
-//  Copyright (c) 2014 Panic, Inc. All rights reserved.
-//
-
-#include <stdio.h>
-#include <stdlib.h>
-
-#include "pd_api.h"
-
-/*
- Game of Life:
- 
- Any live cell with fewer than two live neighbours dies, as if caused by under-population.
- Any live cell with two or three live neighbours lives on to the next generation.
- Any live cell with more than three live neighbours dies, as if by overcrowding.
- Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
-*/
-/*
-static inline int ison(uint8_t* row, int x)
-{
-    return !(row[x/8] & (0x80 >> (x%8)));
-}
-
-static inline int val(uint8_t* row, int x)
-{
-    return 1 - ((row[x/8] >> (7 - (x%8))) & 1);
-}
-
-static inline int rowsum(uint8_t* row, int x)
-{
-    if ( x == 0 )
-        return val(row, LCD_COLUMNS-1) + val(row, x) + val(row, x+1);
-    else if ( x < LCD_COLUMNS - 1 )
-        return val(row, x-1) + val(row, x) + val(row, x+1);
-    else
-        return val(row, x-1) + val(row, x) + val(row, 0);
-}
-
-static inline int middlerowsum(uint8_t* row, int x)
-{
-    if ( x == 0 )
-        return val(row, LCD_COLUMNS-1) + val(row, x+1);
-    else if ( x < LCD_COLUMNS - 1 )
-        return val(row, x-1) + val(row, x+1);
-    else
-        return val(row, x-1) + val(row, 0);
-}
-
-static inline void
-doRow(uint8_t* rowabove, uint8_t* row, uint8_t* rowbelow, uint8_t* outrow)
-{
-    char b = 0;
-    int bitpos = 0x80;
-    int x;
-    
-    for ( x = 0; x < LCD_COLUMNS; ++x )
-    {
-        // If total is 3 cell is alive
-        // If total is 4, no change
-        // Else, cell is dead
-        
-        int sum = rowsum(rowabove, x) + middlerowsum(row, x) + rowsum(rowbelow, x);
-        
-        if ( sum == 3 || (ison(row, x) && sum == 2) )
-            b |= bitpos;
-        
-        bitpos >>= 1;
-        
-        if ( bitpos == 0 )
-        {
-            outrow[x/8] = ~b;
-            b = 0;
-            bitpos = 0x80;
-        }
-    }
-}
-
-
-static PlaydateAPI* pd = NULL;
-
-static void randomize(void)
-{
-    int x, y;
-    uint8_t* frame = pd->graphics->getDisplayFrame();
-
-    for ( y = 0; y < LCD_ROWS; ++y )
-    {
-        uint8_t* row = &frame[y * LCD_ROWSIZE];
-        
-        for ( x = 0; x < LCD_COLUMNS / 8; ++x )
-            row[x] = rand();
-    }
-}
-
-static int
-update(void* ud)
-{
-    PDButtons pushed;
-    pd->system->getButtonState(NULL, &pushed, NULL);
-    
-    if ( pushed & kButtonA )
-        randomize();
-    
-    uint8_t* nextframe = pd->graphics->getFrame(); // working buffer
-    uint8_t* frame = pd->graphics->getDisplayFrame(); // buffer currently on screen (or headed there, anyway)
-    
-    if ( frame != NULL )
-    {
-        uint8_t* rowabove = &frame[LCD_ROWSIZE * (LCD_ROWS - 1)];
-        uint8_t* row = frame;
-        uint8_t* rowbelow = &frame[LCD_ROWSIZE];
-        
-        for ( int y = 0; y < LCD_ROWS; ++y )
-        {
-            doRow(rowabove, row, rowbelow, &nextframe[y * LCD_ROWSIZE]);
-            
-            rowabove = row;
-            row = rowbelow;
-            rowbelow = &frame[((y+2)%LCD_ROWS) * LCD_ROWSIZE];
-        }
-    }
-    
-    // we twiddled the framebuffer bits directly, so we have to tell the system about it
-    pd->graphics->markUpdatedRows(0, LCD_ROWS);
-    
-    return 1;
-}
-
-#ifdef _WINDLL
-__declspec(dllexport)
-#endif
-int eventHandler(PlaydateAPI* playdate, PDSystemEvent event, uint32_t arg)
-{
-    if ( event == kEventInit )
-    {
-        pd = playdate;
-        pd->display->setRefreshRate(0); // run as fast as possible
-        pd->system->setUpdateCallback(update, NULL);
-
-        randomize();
-    }
-    
-    return 0;
-}
-*/

@@ -7,11 +7,11 @@ cd build
 
 set PLAYDATE_SDK_PATH=C:\Users\quinn\Documents\PlaydateSDK
 
-cmake .. -G "NMake Makefiles"
-nmake
+REM cmake .. -G "NMake Makefiles"
+REM nmake
 
 REM see errors in console
-REM cl /c /IS:\playdate_basic\qlib /IC:\Users\quinn\Documents\PlaydateSDK\C_API /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _WINDLL /D _MBCS /D WIN32 /D _WINDOWS /D TARGET_SIMULATOR=1 /D _WINDLL=1 /D TARGET_EXTENSION=1 /D "CMAKE_INTDIR=\"Debug\"" /D hello_world_EXPORTS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /std:c11 /Fo"hello_world.dir\Debug\\" /Fd"hello_world.dir\Debug\vc143.pdb" /external:W3 /Gd /TC /errorReport:prompt S:\playdate_basic\main.c
+cl /c /IS:\playdate_basic\qlib /IC:\Users\quinn\Documents\PlaydateSDK\C_API /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _WINDLL /D _MBCS /D WIN32 /D _WINDOWS /D TARGET_SIMULATOR=1 /D _WINDLL=1 /D TARGET_EXTENSION=1 /D "CMAKE_INTDIR=\"Debug\"" /D hello_world_EXPORTS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /std:c11 /Fo"hello_world.dir\Debug\\" /external:W3 /Gd /TC /errorReport:prompt S:\playdate_basic\main.c
 
 REM USER
 set HEAP_SIZE=8388208

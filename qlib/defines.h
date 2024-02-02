@@ -28,7 +28,7 @@ typedef double float64;
 #define PI      3.14159265359f
 #define EPSILON 0.00001f
 
-//#define ASSERT(Expression) if(!(Expression)) {*(int *)0 = 0;}
+#define ASSERT(Expression) if(!(Expression)) {*(int *)0 = 0;}
 #define ARRAY_COUNT(n)     (sizeof(n) / sizeof(n[0]))
 #define ARRAY_MALLOC(t, n) ((t*)malloc(n * sizeof(t)))
 

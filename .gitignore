@@ -1,6 +1,6 @@
 /PlaydateSDK
 /build
 /Source
-/hello_world.pdx
+/playdate_basic.pdx
 *.sublime-project
 *.sublime-workspace
