@@ -25,8 +25,8 @@ set(CMAKE_CONFIGURATION_TYPES "Debug;Release")
 set(CMAKE_XCODE_GENERATE_SCHEME TRUE)
 
 # Game Name Customization
-set(PLAYDATE_GAME_NAME hello_world)
-set(PLAYDATE_GAME_DEVICE hello_world_DEVICE)
+set(PLAYDATE_GAME_NAME playdate_basic)
+set(PLAYDATE_GAME_DEVICE playdate_basic_DEVICE)
 
 project(${PLAYDATE_GAME_NAME} C ASM)
 
@@ -36,5 +36,5 @@ else()
 	add_library(${PLAYDATE_GAME_NAME} SHARED main.c )
 endif()
 
-include_directories("S:/playdate_basic/qlib")
 include(${SDK}/C_API/buildsupport/playdate_game.cmake)
+
