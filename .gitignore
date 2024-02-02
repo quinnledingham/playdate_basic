@@ -2,3 +2,5 @@
 /build
 /Source
 /hello_world.pdx
+*.sublime-project
+*.sublime-workspace

@@ -36,5 +36,5 @@ else()
 	add_library(${PLAYDATE_GAME_NAME} SHARED main.c )
 endif()
 
+include_directories("S:/playdate_basic/qlib")
 include(${SDK}/C_API/buildsupport/playdate_game.cmake)
-
